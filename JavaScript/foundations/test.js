@@ -1,7 +1,4 @@
-let ask = (question, yes, no) => Boolean(question) ? yes() : no();
+const a = "Hello";
+const b = "World";
 
-ask(
-  "Do you agree?",
-  () => console.log("You agreed."),
-  () => console.log("You canceled the execution.")
-);
+console.log(c);
