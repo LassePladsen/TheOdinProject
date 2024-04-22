@@ -19,6 +19,7 @@ function getHumanChoice() {
     return humanChoice;
   }
   console.log("Invalid input! Try again");
+  getHumanChoice();
 }
 
 function playRound(computerChoice, humanChoice) {
@@ -34,7 +35,6 @@ function playRound(computerChoice, humanChoice) {
   const Logic = {
     WIN: [-1, 2],
     LOSE: [-2, 1],
-    TIE: 0,
   };
 
   humanChoice = humanChoice.toLowerCase();
@@ -50,9 +50,26 @@ function playRound(computerChoice, humanChoice) {
 
   let diff = computerChoice - humanChoice;
 
-  if (Logic.WIN.includes(diff)) console.log("You win!");
-  else if (Logic.LOSE.includes(diff)) console.log("You lose!");
-  else if (Logic.TIE === diff) console.log("Its a tie!");
+  if (Logic.WIN.includes(diff)) {
+    humanScore++;
+    console.log("You win!");
+  } else if (Logic.LOSE.includes(diff)) {
+    computerScore++;
+    console.log("You lose!");
+  } else {
+    console.log("Tie!");
+  }
 }
 
+// Play five rounds:
 playRound(getComputerChoice(), getHumanChoice());
+playRound(getComputerChoice(), getHumanChoice());
+playRound(getComputerChoice(), getHumanChoice());
+playRound(getComputerChoice(), getHumanChoice());
+playRound(getComputerChoice(), getHumanChoice());
+
+// Print scores
+console.log(`Your wins: ${humanScore}` + `\nComputer's wins: ${computerScore}`)
+if (humanScore > computerScore) console.log("You won the set!");
+else if (humanScore < computerScore) console.log("You lost the set!");
+else console.log("The set was tied!");
