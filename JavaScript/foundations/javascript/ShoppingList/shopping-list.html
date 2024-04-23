@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping list example</title>
+    <style>
+      li {
+        margin-bottom: 10px;
+      }
+
+      li button {
+        font-size: 12px;
+        margin-left: 20px;
+        color: #666;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>My shopping list</h1>
+
+    <div>
+      <label for="item">Enter a new item:</label>
+      <input type="text" name="item" id="item" />
+      <button>Add item</button>
+    </div>
+
+    <ul></ul>
+
+    <script>
+      const ul = document.querySelector("ul");
+      const input = document.querySelector("input");
+      const button = document.querySelector("button");
+
+      const onClick = () => {
+        // Get input value, then clear input
+        const inputValue = input.value;
+        if (inputValue === "") return;
+        input.value = "";
+
+        // Add list element from value
+        const newLi = document.createElement("li");
+
+        // Add span and button to list element
+        const newSpan = document.createElement("span");
+        newSpan.textContent = inputValue;
+        const newButton = document.createElement("button");
+        newButton.textContent = "Delete";
+        newButton.addEventListener("click", () => newLi.remove());
+
+        newLi.appendChild(newSpan);
+        newLi.appendChild(newButton);
+        ul.appendChild(newLi);
+
+        // Reset focus on input;
+        input.focus();
+      };
+
+      button.addEventListener("click", onClick);
+
+      // Confirm check for unloading page
+      addEventListener("beforeunload", (e) => {
+        e.preventDefault();
+      });
+    </script>
+  </body>
+</html>
