@@ -25,3 +25,49 @@ input {
   width: 400px;
   margin-bottom: 16px;
 }
+
+/* Solution */
+
+/* Remove list bullets */
+li {
+  list-style-type: none;
+}
+
+/* Remove link underline, change clolor */
+a {
+  text-decoration: none;
+  color: gray;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.header, .footer{
+  margin-left: 13px;
+  margin-right: 13px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-solid {
+  background-color: #eeeeee;
+}
+
+.left-links, .right-links {
+  display: flex;
+  padding: 0;
+  gap: 10px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  padding: 5px 13px 5px 13px;
+}
