@@ -1,6 +1,18 @@
 let computerScore = 0;
 let humanScore = 0;
 
+const scores = document.querySelector("#scores");
+
+const humanScoreParagraph = document.createElement("p");
+const computerScoreParagraph = document.createElement("p");
+humanScoreParagraph.style.marginBottom = "0px";
+computerScoreParagraph.style.marginTop = "0px";
+
+const result = document.querySelector("#result");
+result.setAttribute("style", "white-space: pre;");
+const resultMsg = document.querySelector("#resultMsg");
+// resultSpan.setAttribute("style", "white-space: pre; margin-top: 10px;");
+
 function getComputerChoice() {
   const Choices = {
     0: "rock",
@@ -40,9 +52,8 @@ function playRound(computerChoice, humanChoice) {
   humanChoice = humanChoice.toLowerCase();
 
   // Print choices
-  console.log(
-    `You chose ${humanChoice}` + `\nComputer chose ${computerChoice}`
-  );
+  result.textContent =
+    `You chose ${humanChoice}` + `\nComputer chose ${computerChoice}`;
 
   // Convert to int
   humanChoice = Choices[humanChoice];
@@ -52,24 +63,46 @@ function playRound(computerChoice, humanChoice) {
 
   if (Logic.WIN.includes(diff)) {
     humanScore++;
-    console.log("You win!");
+    resultMsg.textContent = "You win!";
+    resultMsg.style.color = "green";
   } else if (Logic.LOSE.includes(diff)) {
     computerScore++;
-    console.log("You lose!");
+    resultMsg.textContent = "You lose!";
+    resultMsg.style.color = "red";
   } else {
-    console.log("Tie!");
+    resultMsg.textContent = "Tie!";
+    resultMsg.style.color = "black";
   }
+  showScore();
 }
 
-// Play five rounds:
-playRound(getComputerChoice(), getHumanChoice());
-playRound(getComputerChoice(), getHumanChoice());
-playRound(getComputerChoice(), getHumanChoice());
-playRound(getComputerChoice(), getHumanChoice());
-playRound(getComputerChoice(), getHumanChoice());
+// Add human choice buttons
+const choiceButtons = document.querySelectorAll("button.choice");
+choiceButtons.forEach((button) => {
+  button.addEventListener("click", () =>
+    playRound(getComputerChoice(), button.textContent.toLowerCase())
+  );
+});
 
-// Print scores
-console.log(`Your wins: ${humanScore}` + `\nComputer's wins: ${computerScore}`)
-if (humanScore > computerScore) console.log("You won the set!");
-else if (humanScore < computerScore) console.log("You lost the set!");
-else console.log("The set was tied!");
+function showScore() {
+  // Show scores
+  humanScoreParagraph.textContent = `Your wins: ${humanScore}`;
+  computerScoreParagraph.textContent = `Computer's wins: ${computerScore}`;
+
+  // Color lead as green
+  if (humanScore > computerScore) {
+    humanScoreParagraph.style.color = "green";
+    computerScoreParagraph.style.color = "black";
+  } else if (humanScore < computerScore) {
+    humanScoreParagraph.style.color = "black";
+    computerScoreParagraph.style.color = "green";
+  } else {
+    humanScoreParagraph.style.color = "black";
+    computerScoreParagraph.style.color = "black";
+  }
+
+  scores.appendChild(humanScoreParagraph);
+  scores.appendChild(computerScoreParagraph);
+}
+
+showScore();
