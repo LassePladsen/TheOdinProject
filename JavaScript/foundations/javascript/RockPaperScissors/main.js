@@ -11,7 +11,6 @@ computerScoreParagraph.style.marginTop = "0px";
 const result = document.querySelector("#result");
 result.setAttribute("style", "white-space: pre;");
 const resultMsg = document.querySelector("#resultMsg");
-// resultSpan.setAttribute("style", "white-space: pre; margin-top: 10px;");
 
 function getComputerChoice() {
   const Choices = {
